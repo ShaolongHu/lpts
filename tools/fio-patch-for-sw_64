@@ -1,0 +1,31 @@
+diff -r fio-2.1.10-after/arch/arch-alpha.h fio-2.1.10/arch/arch-alpha.h
+1,2c1,2
+< #ifndef ARCH_SW_64_H
+< #define ARCH_SW_64_H
+---
+> #ifndef ARCH_ALPHA_H
+> #define ARCH_ALPHA_H
+4c4
+< #define FIO_ARCH	(arch_sw_64)
+---
+> #define FIO_ARCH	(arch_alpha)
+22,23c22,23
+< #define read_barrier()		__asm__ __volatile__("memb": : :"memory")
+< #define write_barrier()		__asm__ __volatile__("memb": : :"memory")
+---
+> #define read_barrier()		__asm__ __volatile__("mb": : :"memory")
+> #define write_barrier()		__asm__ __volatile__("wmb": : :"memory")
+diff -r fio-2.1.10-after/arch/arch.h fio-2.1.10/arch/arch.h
+10c10
+< 	arch_sw_64,
+---
+> 	arch_alpha,
+41,42c41,42
+< #elif defined(__sw_64__)
+< #include "arch-sw_64.h"
+---
+> #elif defined(__alpha__)
+> #include "arch-alpha.h"
+
+in fio-2.1.10/arch, ln -s arch-alpha.h arch-sw_64.h
+
